@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AirdropWallet {
+  address String  @id
+  sender  String
+  amount  Decimal @db.Decimal(78, 0)
+
+  blockNumber      BigInt
+  transactionHash  String
+  transactionIndex Int
+  logIndex         Int
+
+  isAirdropDistributor Boolean
+
+  @@index([blockNumber, transactionIndex, logIndex])
+  @@index([isAirdropDistributor])
+  @@map("airdrop_wallets")
+}
+
+model AirdropTransfer {
+  hash       String  @id
+  fromWallet String
+  toWallet   String
+  amount     Decimal @db.Decimal(78, 0)
+
+  blockNumber      BigInt
+  transactionHash  String
+  transactionIndex Int
+  logIndex         Int
+  // destination String // binance or katana
+
+  @@index([fromWallet])
+  @@index([toWallet])
+  @@index([transactionHash])
+  @@index([blockNumber, transactionIndex, logIndex])
+  @@map("airdrop_transfers")
+}
+
+model Swap {
+  hash String @id
+
+  blockNumber      BigInt
+  transactionHash  String @unique
+  transactionIndex Int
+  logIndex         Int
+
+  @@index([transactionHash])
+  @@map("swaps")
+}
