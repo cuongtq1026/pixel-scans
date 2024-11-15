@@ -18,9 +18,9 @@ The sold pixel data is track by
 ```text
 Number of research wallets: 881
 Number of sold wallets: 668
-Retention rate: 75.82%
+Retention rate: 24.18%%
 
-total: 881 | sold: 668 | retention rate: 75.82%
+total: 881 | sold: 668 | retention rate: 24.18%%
 ```
 
 To install dependencies:
