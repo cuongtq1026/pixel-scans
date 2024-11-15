@@ -138,7 +138,8 @@ async function retentionScan() {
       },
     }),
   ]);
-  const retentionRate = (airdropSoldWallets.length / totalAirdropWallets) * 100;
+  const retentionRate =
+    100 - (airdropSoldWallets.length / totalAirdropWallets) * 100;
 
   console.log(
     `total: ${totalAirdropWallets} | sold: ${airdropSoldWallets.length} | retention rate: ${retentionRate.toFixed(2)}%`,
